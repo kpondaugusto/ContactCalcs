@@ -1,0 +1,61 @@
+figure.facecolor : white
+
+font.size: 15
+font.family: Arial
+font.sans-serif: Arial, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif
+
+### axes
+axes.grid: True
+axes.facecolor: white
+axes.linewidth: 1.0
+axes.titlesize: 12
+axes.titleweight: normal
+axes.labelsize: 12
+axes.labelweight: normal
+axes.spines.top: True
+axes.spines.right: True
+axes.color_cycle:            blue, white, red, cyan, magenta, yellow, black
+
+lines.linewidth : 3
+
+lines.linestyle: none # default line style to none so that when data comes in out of order it doesnt connect it all 
+
+lines.color: indigo
+text.color: .15
+
+##x ticks
+
+xtick.color: black
+xtick.direction: in
+xtick.labelsize: 12
+xtick.major.pad: 7
+xtick.major.size: 0
+xtick.major.width: 1
+xtick.minor.size: 0
+xtick.minor.width: .5
+
+##y ticks
+
+ytick.color: black
+ytick.direction: in
+ytick.labelsize: 12
+ytick.major.pad: 7
+ytick.major.size: 0
+ytick.major.width: 1
+ytick.minor.size: 0
+ytick.minor.width: .5
+
+##lines/markers 
+
+lines.marker      : d    # marker type 
+lines.markeredgewidth  : 0.5     # the line width around the marker symbol
+lines.markersize  : 6            # markersize, in points
+lines.dash_joinstyle : round        # miter|round|bevel
+lines.dash_capstyle : butt          # butt|round|projecting
+lines.solid_joinstyle : round       # miter|round|bevel
+lines.solid_capstyle : projecting   # butt|round|projecting
+lines.antialiased : True         # render lines in antialiased (no jaggies)
+lines.dashed_pattern : 6, 6
+lines.dashdot_pattern : 3, 5, 1, 5
+lines.dotted_pattern : 1, 3
+lines.scale_dashes: False
