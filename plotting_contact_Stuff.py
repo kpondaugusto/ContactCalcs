@@ -16,8 +16,8 @@ import scipy.integrate as integrate
 from scipy.special import kn
 import scipy.special as special
 
-# plt.style.use('./plottingstype.mplstyle')
-plt.style.use('default')
+plt.style.use('./plottingstype.mplstyle')
+# plt.style.use('default')
 
 B0 = 202.14 #G
 Bzero = 209.07 #G
@@ -52,21 +52,6 @@ def polyfunc(z):
 def equation(z, ToTF):
 	return -polylog(3,-z) + 1/gamma(4) * ToTF**(-3)
 
-# def fugacity(ToTF):
-# 	z = symbols('z')
-# 	equation = Eq(- ( -z + z**2/2**3 - z**3/3**3 + z**4/4**3 - z**5/5**3 + z**6/6**3 - z**7/7**3 + z**8/8**3 - z**9/9**3 + z**10/10**3 - z**11/11**3 + z**12/12**3) ,1/gamma(4)*ToTF**(-3))
-# 	solution = solve(equation,z)[0]
-# 	return solution
-
-def a97thres(B):
-	B = np.linspace(Boff-Ba, Boff+Ba, 100)
-	a97 = abg * (1 - (Bzero - B0)/(B - B0))
-	
-	threshold = 100
-	a97[a97*kF>threshold] = np.nan
-	a97[a97*kF<-threshold] = np.nan
-	
-	return a97
 
 def a97thres2(B):
 	B = Bosc(tvalues/timescale)
@@ -91,6 +76,38 @@ Bvalues = np.linspace(Boff-Ba, Boff+Ba, 100)
 
 tvalues = np.linspace(0, 6*np.pi/(omega) * timescale, 100)
 
+def scatteringswave(B):
+	B = np.linspace(200.0, 210.0, 100)
+
+	a97 = abg * (1 - (Bzero - B0)/(B - B0))
+	
+	threshold = 20
+	a97[a97*kF>threshold] = np.nan
+	a97[a97*kF<-threshold] = np.nan
+	
+	return a97
+
+def feshbachswave():
+	Bvalues = np.linspace(200.0, 210.0, 100)
+	plt.xlabel('Magnetic Field (G)')
+	plt.ylabel('kF*a (dim)')
+	plt.plot(Bvalues, scatteringswave(Bvalues)*kF)
+	
+def scatteringcrosssec():
+	B = np.linspace(200.0, 210.0, 100)
+
+	sigma = 4*np.pi*scatteringswave(B)/(1 +k**2*scatteringswave**2)
+
+def a97thres(B):
+	B = np.linspace(Boff-Ba, Boff+Ba, 100)
+
+	a97 = abg * (1 - (Bzero - B0)/(B - B0))
+	
+	threshold = 100
+	a97[a97*kF>threshold] = np.nan
+	a97[a97*kF<-threshold] = np.nan
+	
+	return a97
 
 def subplots1():
 	figure, axes = plt.subplots(2, 3) 
@@ -125,10 +142,10 @@ def Boscplot():
 	plt.figure(2)
 
 	plt.xlabel('Time (ms)')
-	plt.ylabel('B Field (G)')
+	plt.ylabel('Magnetic Field (G)')
 # plt.plot(tvalues, 1/(kF*a97(Bosc(tvalues/timescale))))
-	plt.plot(tvalues, Bosc(tvalues/timescale))
-	plt.plot(tvalues, Bosc(tvalues/timescale+0.35/omega),linestyle='dashed')
+	plt.plot(tvalues, Bosc(tvalues/timescale),linestyle='solid',label='')
+	plt.plot(tvalues, Bosc(tvalues/timescale+1/omega),linestyle='dashed')
 
 	return plt.show()
 

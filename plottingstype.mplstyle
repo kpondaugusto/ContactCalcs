@@ -1,26 +1,25 @@
-figure.facecolor : white
+figure.facecolor : ghostwhite
 
-font.size: 15
+font.size: 16
 font.family: Arial
 font.sans-serif: Arial, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif
 
 ### axes
 axes.grid: True
-axes.facecolor: white
+axes.facecolor: ghostwhite
 axes.linewidth: 1.0
-axes.titlesize: 12
+axes.titlesize: 13
 axes.titleweight: normal
-axes.labelsize: 12
+axes.labelsize: 13
 axes.labelweight: normal
 axes.spines.top: True
 axes.spines.right: True
-axes.color_cycle:            blue, white, red, cyan, magenta, yellow, black
-
+axes.prop_cycle : cycler(color=['deeppink', 'teal', 'gold', 'yellowgreen','tomato','darkorchid'])
 lines.linewidth : 3
 
 lines.linestyle: none # default line style to none so that when data comes in out of order it doesnt connect it all 
 
-lines.color: indigo
+#lines.color: cycler(color=['deeppink', 'teal', 'gold', 'yellowgreen','tomato','darkorchid'])
 text.color: .15
 
 ##x ticks
@@ -47,7 +46,7 @@ ytick.minor.width: .5
 
 ##lines/markers 
 
-lines.marker      : d    # marker type 
+lines.marker      : o    # marker type 
 lines.markeredgewidth  : 0.5     # the line width around the marker symbol
 lines.markersize  : 6            # markersize, in points
 lines.dash_joinstyle : round        # miter|round|bevel
