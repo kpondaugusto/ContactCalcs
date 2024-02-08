@@ -76,6 +76,8 @@ Bvalues = np.linspace(Boff-Ba, Boff+Ba, 100)
 
 tvalues = np.linspace(0, 6*np.pi/(omega) * timescale, 100)
 
+#plotting s-wave fesbach resonance 
+
 def scatteringswave(B):
 	B = np.linspace(200.0, 210.0, 100)
 
