@@ -15,8 +15,13 @@ from scipy.optimize import fsolve
 import scipy.integrate as integrate
 from scipy.special import kn
 import scipy.special as special
+import os
 
-plt.style.use('./plottingstype.mplstyle')
+here = os.path.dirname(os.path.abspath(__file__))
+
+filename = os.path.join(here, './plottingstype.mplstyle')
+
+plt.style.use(filename)
 # plt.style.use('default')
 
 B0 = 202.14 #G
@@ -110,6 +115,17 @@ def a97thres(B):
 	a97[a97*kF<-threshold] = np.nan
 	
 	return a97
+
+# plots for B, kFa, time, etc 
+
+def linearBplot():
+	
+	plt.xlabel('Magnetic Field (G)')
+	plt.ylabel('1/kFa (dim)')
+#reducing # axis ticks on x axis so it is more legible
+	plt.locator_params(axis='x', nbins=6)
+	plt.plot(Bvalues, 1/a97(Bvalues),'lightblue')
+	
 
 def subplots1():
 	figure, axes = plt.subplots(2, 3) 
@@ -236,10 +252,13 @@ def omegaplot():
 
 	return plt.show()
 
-from numpy import loadtxt
-bulkT58 = loadtxt("zetaomega_T0.58.txt", comments="#", delimiter=" ", unpack=False)
+zetaomega_T058 = os.path.join(here, 'zetaomega_T0.58.txt')
+zetaomega_T025 = os.path.join(here, 'zetaomega_T0.25.txt')
 
-bulkT25 = loadtxt("zetaomega_T0.25.txt", comments="#", delimiter=" ", unpack=False)
+from numpy import loadtxt
+bulkT58 = loadtxt(zetaomega_T058, comments="#", delimiter=" ", unpack=False)
+
+bulkT25 = loadtxt(zetaomega_T025, comments="#", delimiter=" ", unpack=False)
 
 bulkmeasshort = [0.00014,0.000131]
 bulkshorterror = [0.00018,0.00011]
@@ -259,13 +278,13 @@ def bulkplot():
 	ax = fig.add_subplot(111)
 
 	ax.set_xlabel('omega/EF')
-	ax.set_ylabel('bulk')
+	ax.set_ylabel('Dynamical Bulk Viscosity' )
 	ax.loglog(bulkT58[:,0],bulkT58[:,1],linestyle='-')
-	ax.loglog(bulkT58[:,0],bulkT58[:,1],label='T=.58',marker='.')
-	ax.loglog(bulkT25[:,0],bulkT25[:,1],linestyle='-')
-	ax.loglog(bulkT25[:,0],bulkT25[:,1],label='T=.25',marker='d')
-	ax.errorbar(omegaoEF,bulkmeaslong,yerr = bulklongerror,marker='o',linestyle='None',label='203G')
-	ax.errorbar(omegaoEF202p1,bulkmeas202p1,yerr = bulkerror202p1,marker='o',linestyle='None',label='202.1G')
+# 	ax.loglog(bulkT58[:,0],bulkT58[:,1],label='T=.58',marker='.')
+# 	ax.loglog(bulkT25[:,0],bulkT25[:,1],linestyle='-')
+# 	ax.loglog(bulkT25[:,0],bulkT25[:,1],label='T=.25',marker='d')
+# 	ax.errorbar(omegaoEF,bulkmeaslong,yerr = bulklongerror,marker='o',linestyle='None',label='203G')
+# 	ax.errorbar(omegaoEF202p1,bulkmeas202p1,yerr = bulkerror202p1,marker='o',linestyle='None',label='202.1G')
 	ax.legend()
 	ax.set_yscale('log')
 	ax.set_xscale('log')
